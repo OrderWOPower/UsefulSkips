@@ -26,7 +26,7 @@ namespace UsefulSkips
                     MobileParty.MainParty.Position2D = Settlement.Find("tutorial_training_field").Position2D;
                     ((MapState)GameStateManager.Current.ActiveState).Handler.TeleportCameraToMainParty();
                     TutorialPhase.Instance.PlayerTalkedWithBrotherForTheFirstTime();
-                    StoryModeManager.Current.MainStoryLine.CompleteTutorialPhase(true);
+                    StoryModeManager.Current.MainStoryLine.CompleteTutorialPhase(false);
                 }
             }
         }

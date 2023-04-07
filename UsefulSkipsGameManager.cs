@@ -12,8 +12,8 @@ namespace UsefulSkips
         {
             List<CodeInstruction> codes = new List<CodeInstruction>(instructions);
             List<CodeInstruction> codesToInsert = new List<CodeInstruction>();
-            CodeInstruction codeAtIndex = null;
             MethodInfo method = null;
+            int index = 0;
             int startIndex = 0;
             int endIndex = 0;
             for (int i = 0; i < codes.Count; i++)
@@ -25,14 +25,14 @@ namespace UsefulSkips
                 else if (codes[i].opcode == OpCodes.Ldloc_0)
                 {
                     endIndex = i + 2;
-                    codeAtIndex = codes[i + 3];
+                    index = i + 3;
                     method = (MethodInfo)codes[i - 5].operand;
                 }
             }
             codesToInsert.Add(new CodeInstruction(OpCodes.Ldarg_0));
             codesToInsert.Add(new CodeInstruction(OpCodes.Call, method));
+            codes.InsertRange(index, codesToInsert);
             codes.RemoveRange(startIndex, endIndex - startIndex + 1);
-            codes.InsertRange(codes.IndexOf(codeAtIndex), codesToInsert);
             return codes;
         }
     }

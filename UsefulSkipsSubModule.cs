@@ -1,8 +1,12 @@
 ﻿using HarmonyLib;
 using SandBox;
 using StoryMode;
+using System;
+using System.Reflection;
 using TaleWorlds.Core;
+using TaleWorlds.Library;
 using TaleWorlds.MountAndBlade;
+using Module = TaleWorlds.MountAndBlade.Module;
 
 namespace UsefulSkips
 {
@@ -30,8 +34,16 @@ namespace UsefulSkips
         {
             if (UsefulSkipsSettings.Instance.ShouldSkipCampaignIntro)
             {
-                _harmony.Patch(AccessTools.Method(typeof(SandBoxGameManager), "OnLoadFinished"), transpiler: new HarmonyMethod(AccessTools.Method(typeof(UsefulSkipsGameManager), "Transpiler")));
-                _harmony.Patch(AccessTools.Method(typeof(StoryModeGameManager), "OnLoadFinished"), transpiler: new HarmonyMethod(AccessTools.Method(typeof(UsefulSkipsGameManager), "Transpiler")));
+                try
+                {
+                    _harmony.Patch(AccessTools.Method(typeof(SandBoxGameManager), "OnLoadFinished"), transpiler: new HarmonyMethod(AccessTools.Method(typeof(UsefulSkipsGameManager), "Transpiler")));
+                    _harmony.Patch(AccessTools.Method(typeof(StoryModeGameManager), "OnLoadFinished"), transpiler: new HarmonyMethod(AccessTools.Method(typeof(UsefulSkipsGameManager), "Transpiler")));
+                }
+                catch (Exception)
+                {
+                    MethodBase method = MethodBase.GetCurrentMethod();
+                    InformationManager.DisplayMessage(new InformationMessage(method.DeclaringType.FullName + "." + method.Name + ": Error skipping campaign intro!"));
+                }
             }
         }
 

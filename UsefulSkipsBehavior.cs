@@ -17,14 +17,15 @@ namespace UsefulSkips
         [HarmonyPatch(typeof(TrainingFieldCampaignBehavior), "OnCharacterCreationIsOver")]
         public class UsefulSkipsTrainingFieldBehavior
         {
-            // Skip the tutorial.
             private static void Prefix(ref bool ___SkipTutorialMission)
             {
                 if (UsefulSkipsSettings.Instance.ShouldSkipTutorial)
                 {
+                    // Skip the tutorial.
                     ___SkipTutorialMission = true;
+
                     MobileParty.MainParty.Position2D = Settlement.Find("tutorial_training_field").Position2D;
-                    ((MapState)GameStateManager.Current.ActiveState).Handler.TeleportCameraToMainParty();
+                    ((MapState)GameStateManager.Current.ActiveState)?.Handler.TeleportCameraToMainParty();
                     TutorialPhase.Instance.PlayerTalkedWithBrotherForTheFirstTime();
                     StoryModeManager.Current.MainStoryLine.CompleteTutorialPhase(false);
                 }
@@ -43,8 +44,10 @@ namespace UsefulSkips
                     PartyBase.MainParty.ItemRoster.Clear();
                     PartyBase.MainParty.ItemRoster.AddToCounts(DefaultItems.Grain, 2);
                     Hero.MainHero.Gold = 1000;
+
                     return false;
                 }
+
                 return true;
             }
         }

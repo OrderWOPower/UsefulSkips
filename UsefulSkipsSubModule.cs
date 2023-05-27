@@ -21,11 +21,11 @@ namespace UsefulSkips
             _harmony.PatchAll();
         }
 
-        // Skip the splash screen.
         protected override void OnBeforeInitialModuleScreenSetAsRoot()
         {
             if (UsefulSkipsSettings.Instance.ShouldSkipSplashScreen)
             {
+                // Skip the splash screen.
                 AccessTools.Field(typeof(Module), "_splashScreenPlayed").SetValue(Module.CurrentModule, true);
             }
         }
@@ -41,8 +41,7 @@ namespace UsefulSkips
                 }
                 catch (Exception)
                 {
-                    MethodBase method = MethodBase.GetCurrentMethod();
-                    InformationManager.DisplayMessage(new InformationMessage(method.DeclaringType.FullName + "." + method.Name + ": Error skipping campaign intro!"));
+                    InformationManager.DisplayMessage(new InformationMessage(MethodBase.GetCurrentMethod().DeclaringType.FullName + "." + MethodBase.GetCurrentMethod().Name + ": Error skipping campaign intro!"));
                 }
             }
         }

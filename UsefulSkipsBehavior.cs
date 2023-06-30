@@ -40,9 +40,10 @@ namespace UsefulSkips
                 if (UsefulSkipsSettings.Instance.ShouldSkipTutorial)
                 {
                     DisableHeroAction.Apply(StoryModeHeroes.ElderBrother);
-                    StoryModeHeroes.ElderBrother.Clan = CampaignData.NeutralFaction;
+                    StoryModeHeroes.ElderBrother.Clan = null;
                     PartyBase.MainParty.ItemRoster.Clear();
                     PartyBase.MainParty.ItemRoster.AddToCounts(DefaultItems.Grain, 2);
+                    Hero.MainHero.Heal(Hero.MainHero.MaxHitPoints, false);
                     Hero.MainHero.Gold = 1000;
 
                     return false;

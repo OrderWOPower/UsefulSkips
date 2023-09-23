@@ -73,7 +73,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UsefulSkipsBehavior.cs" />
+    <Compile Include="UsefulSkipsCampaignBehavior.cs" />
     <Compile Include="UsefulSkipsCharacterCreationState.cs" />
     <Compile Include="UsefulSkipsGameManager.cs" />
     <Compile Include="UsefulSkipsSettings.cs" />

@@ -7,12 +7,20 @@ namespace UsefulSkips
     [HarmonyPatch(typeof(CharacterCreationState), "NextStage")]
     public class UsefulSkipsCharacterCreationState
     {
+        public static void Prefix(CharacterCreationState __instance)
+        {
+            if (UsefulSkipsSettings.Instance.ShouldSkipCharacterCreation)
+            {
+                // Set a random culture.
+                __instance.CurrentCharacterCreationContent.SetSelectedCulture(__instance.CurrentCharacterCreationContent.GetCultures().GetRandomElementInefficiently(), __instance.CharacterCreation);
+            }
+        }
+
         public static void Postfix(CharacterCreationState __instance)
         {
             if (UsefulSkipsSettings.Instance.ShouldSkipCharacterCreation)
             {
-                // Set a random culture and skip character creation.
-                __instance.CurrentCharacterCreationContent.SetSelectedCulture(__instance.CurrentCharacterCreationContent.GetCultures().GetRandomElementInefficiently(), __instance.CharacterCreation);
+                // Skip character creation.
                 __instance.FinalizeCharacterCreation();
             }
         }

@@ -16,15 +16,18 @@ namespace UsefulSkips
 
             for (int i = 0; i < codes.Count; i++)
             {
-                if (codes[i].opcode == OpCodes.Stloc_0)
+                if (codes[i].operand is "SandBox")
                 {
-                    startIndex = i - 3;
+                    startIndex = i - 4;
                 }
-                else if (codes[i].opcode == OpCodes.Ldloc_0)
+                else if (codes[i].opcode == OpCodes.Ldloc_0 || codes[i].opcode == OpCodes.Ldloc_2)
                 {
                     endIndex = i + 2;
                     index = i + 3;
-                    method = (MethodInfo)codes[i - 5].operand;
+                }
+                else if (codes[i].opcode == OpCodes.Ldftn)
+                {
+                    method = (MethodInfo)codes[i].operand;
                 }
             }
 

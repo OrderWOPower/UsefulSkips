@@ -46,6 +46,11 @@ namespace UsefulSkips
         {
             _harmony.Unpatch(AccessTools.Method(typeof(SandBoxGameManager), "OnLoadFinished"), AccessTools.Method(typeof(UsefulSkipsGameManager), "Transpiler"));
             _harmony.Unpatch(AccessTools.Method(typeof(StoryModeGameManager), "OnLoadFinished"), AccessTools.Method(typeof(UsefulSkipsGameManager), "Transpiler"));
+
+            if (AccessTools.TypeByName("BKCEGameManager") != null)
+            {
+                _harmony.Unpatch(AccessTools.Method(AccessTools.TypeByName("BKCEGameManager"), "OnLoadFinished"), AccessTools.Method(typeof(UsefulSkipsGameManager), "Transpiler"));
+            }
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using HarmonyLib;
 using TaleWorlds.MountAndBlade;
-using Module = TaleWorlds.MountAndBlade.Module;
 
 namespace UsefulSkips
 {

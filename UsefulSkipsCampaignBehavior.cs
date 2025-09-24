@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using Helpers;
 using StoryMode;
 using StoryMode.GameComponents.CampaignBehaviors;
 using StoryMode.StoryModeObjects;
@@ -9,6 +10,7 @@ using TaleWorlds.CampaignSystem.GameState;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
+using TaleWorlds.Localization;
 
 namespace UsefulSkips
 {
@@ -24,7 +26,7 @@ namespace UsefulSkips
                     // Skip the tutorial.
                     ___SkipTutorialMission = true;
 
-                    MobileParty.MainParty.Position2D = Settlement.Find("tutorial_training_field").Position2D;
+                    MobileParty.MainParty.Position = Settlement.Find("tutorial_training_field").Position;
                     ((MapState)GameStateManager.Current.ActiveState)?.Handler.TeleportCameraToMainParty();
                     TutorialPhase.Instance.PlayerTalkedWithBrotherForTheFirstTime();
                     StoryModeManager.Current.MainStoryLine.CompleteTutorialPhase(false);
@@ -39,6 +41,10 @@ namespace UsefulSkips
             {
                 if (UsefulSkipsSettings.Instance.ShouldSkipTutorial)
                 {
+                    TextObject textObject = FactionHelper.GenerateClanNameforPlayer();
+
+                    // Ensure that the player's clan name matches the selected culture.
+                    Clan.PlayerClan.ChangeClanName(textObject, textObject);
                     DisableHeroAction.Apply(StoryModeHeroes.ElderBrother);
                     StoryModeHeroes.ElderBrother.Clan = null;
                     PartyBase.MainParty.ItemRoster.Clear();

@@ -67,12 +67,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UsefulSkipsCampaignBehavior.cs" />
     <Compile Include="UsefulSkipsCharacterCreationManager.cs" />
     <Compile Include="UsefulSkipsGameStateManager.cs" />
     <Compile Include="UsefulSkipsSettings.cs" />
     <Compile Include="UsefulSkipsSubModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UsefulSkipsTrainingFieldCampaignBehavior.cs" />
+    <Compile Include="UsefulSkipsTutorialPhaseCampaignBehavior.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

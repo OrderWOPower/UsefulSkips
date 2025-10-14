@@ -19,7 +19,7 @@ namespace UsefulSkips
                 TextObject textObject = FactionHelper.GenerateClanNameforPlayer();
 
                 // Ensure that the player's clan name matches the selected culture.
-                Clan.PlayerClan.ChangeClanName(textObject, textObject);
+                Clan.PlayerClan?.ChangeClanName(textObject, textObject);
                 DisableHeroAction.Apply(StoryModeHeroes.ElderBrother);
                 StoryModeHeroes.ElderBrother.Clan = null;
                 PartyBase.MainParty.ItemRoster.Clear();

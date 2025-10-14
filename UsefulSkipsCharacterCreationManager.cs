@@ -47,7 +47,7 @@ namespace UsefulSkips
                     }
 
                     // Ensure that the player's clan name matches the selected culture.
-                    Clan.PlayerClan.ChangeClanName(textObject, textObject);
+                    Clan.PlayerClan?.ChangeClanName(textObject, textObject);
                     // Give the player 12 focus points and 6 attribute points.
                     Hero.MainHero.HeroDeveloper.UnspentFocusPoints += 12;
                     Hero.MainHero.HeroDeveloper.UnspentAttributePoints += 6;

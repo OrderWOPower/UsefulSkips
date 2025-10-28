@@ -9,10 +9,10 @@ using TaleWorlds.Localization;
 
 namespace UsefulSkips
 {
-    [HarmonyPatch(typeof(TutorialPhaseCampaignBehavior), "OnStoryModeTutorialEnded")]
+    [HarmonyPatch(typeof(TutorialPhaseCampaignBehavior), "FinalizeTutorialPhase")]
     public class UsefulSkipsTutorialPhaseCampaignBehavior
     {
-        private static bool Prefix()
+        public static bool Prefix()
         {
             if (UsefulSkipsSettings.Instance.ShouldSkipTutorial)
             {
